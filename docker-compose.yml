@@ -29,6 +29,16 @@ services:
     volumes:
       - ./public:/usr/local/apache2/htdocs/
 
+  vis:
+    image: node:13
+    command: node server.js
+    ports:
+      - "8095:8000"
+    volumes:
+      - ./ConsultasAPI:/usr/src/app
+      - ./ConsultasAPI/nodemodules:/usr/src/app/node_modules
+
+
 networks:
   nginx-docker_interna:
     external: true

@@ -1,0 +1,3 @@
+[submodule "ConsultasAPI"]
+	path = ConsultasAPI
+	url = https://github.com/samsaurio/ConsultasAPI.git
