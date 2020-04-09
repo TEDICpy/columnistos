@@ -30,12 +30,15 @@ services:
       - ./public:/usr/local/apache2/htdocs/
 
   vis:
-    image: node:13
+    build:
+      context: .
+      dockerfile: Dockerfile.vis
     command: node server.js
+    entrypoint: /docker-entrypoint.sh
     ports:
       - "8095:8000"
     volumes:
-      - ./ConsultasAPI:/usr/src/app
+  #   - ./ConsultasAPI:/usr/src/app
       - ./ConsultasAPI/nodemodules:/usr/src/app/node_modules
 
 
