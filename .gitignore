@@ -7,6 +7,7 @@ public/
 nbproject/
 docker-run.sh
 last_checked_dm.json
+nodemodules
 
 # Project specific
 *.flag

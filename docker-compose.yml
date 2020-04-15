@@ -38,8 +38,7 @@ services:
     ports:
       - "8095:8000"
     volumes:
-  #   - ./ConsultasAPI:/usr/src/app
-      - ./ConsultasAPI/nodemodules:/usr/src/app/node_modules
+      - ./nodemodules:/usr/src/app/node_modules
 
 
 networks:
