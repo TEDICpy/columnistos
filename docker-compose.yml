@@ -35,10 +35,13 @@ services:
       dockerfile: Dockerfile.vis
     command: node server.js
     entrypoint: /docker-entrypoint.sh
+    networks:
+      - nginx-docker_interna
     #ports:
     #  - "8095:8000"
     volumes:
       - ./nodemodules:/usr/src/app/node_modules
+      - ./diarios:/usr/src/app/diarios:ro
 
 
 networks:
