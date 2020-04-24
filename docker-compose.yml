@@ -42,7 +42,7 @@ services:
     volumes:
       - ./nodemodules:/usr/src/app/node_modules
       - ./diarios:/usr/src/app/diarios:ro
-
+      - /etc/localtime:/etc/localtime:ro
 
 networks:
   nginx-docker_interna:
