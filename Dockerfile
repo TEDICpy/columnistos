@@ -19,6 +19,4 @@ COPY . .
 
 COPY docker-run.sh /
 
-EXPOSE 8000
-
 CMD [ "/docker-run.sh" ]

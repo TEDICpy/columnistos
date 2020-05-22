@@ -13,5 +13,7 @@ WORKDIR /usr/src/app
 
 RUN git clone $CODE .
 
+EXPOSE 8000
+
 COPY docker-entrypoint.sh /
 
