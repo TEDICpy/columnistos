@@ -115,6 +115,10 @@ Este es el paso que genera los tweets del resumen del día anterior al que se co
 runbottweet.sh
 ```
 
+# Dump
+
+En el archivo `dump_db.sh` hay instrucciones para sumar el dump que se genera al repositorio de la organización.
+
 # Cron
 
 Para que todo funcione automaticamente hay que agregar los `.sh` a algún cronjob. En el caso de [@columnistos] la configuración actual es:
@@ -123,6 +127,7 @@ Para que todo funcione automaticamente hay que agregar los `.sh` a algún cronjo
 30 * * * * $HOME/columnistos/runcrawlers.sh
 */15 * * * * $HOME/columnistos/runbotdm.sh
 0 10 * * * $HOME/columnistos/runbottweet.sh
+5 10 * * * $HOME/columnistos/dump_db.sh
 ```
 # Instalación y uso con Docker
 
@@ -130,7 +135,7 @@ Para que todo funcione automaticamente hay que agregar los `.sh` a algún cronjo
 
 **1.** Copiar el archivo **docker.env-sample** a **docker.env** y agregar los valores deseados, es decir, las claves de la API de twitter y un par de parámetros más.
 
-También copiar **docker-run.sh-sample** a **docker-run.sh** y cambiar los valores de los diarios a escrapear. 
+También copiar **docker-run.sh-sample** a **docker-run.sh** y cambiar los valores de los diarios a escrapear.
 
 **2.** Levantar el contenedeor (la primer vez va a demorar pues instala todas las dependencias y crea la base de nombres):
 ```
@@ -141,7 +146,7 @@ Con esto ya se puede poner el scrapper a funcionar, corriendo cada vez: `docker-
 
 Si se desea comenzar con base nueva, borrar el archivo **diarios.sqlite** que está dentro de la carpeta **diarios** y volver al punto 2
 
-Además esta otra funcionalidad es importante: 
+Además esta otra funcionalidad es importante:
 
 ## Mensaje directo
 
@@ -176,9 +181,9 @@ docker-compose run --rm app python columnistos_bot.py -tweet
 docker-compose up -d web
 ```
 
-Esto deja corriendo un **servidor web**, quiere decir que si se apaga la computadora o se hace un `docker-compose stop` la base csv ya no estará públicamente dispinible. 
+Esto deja corriendo un **servidor web**, quiere decir que si se apaga la computadora o se hace un `docker-compose stop` la base csv ya no estará públicamente dispinible.
 
-Para verlo en tu computaodra local, puedes acceder a localhost:8095 en tu navegador. 
+Para verlo en tu computaodra local, puedes acceder a localhost:8095 en tu navegador.
 
 ## Un ejemplo de CRON con docker para Paraguay:
 

@@ -39,7 +39,7 @@ class AbcSpider(scrapy.Spider):
                 autor = cred['name'].title().strip()
                 # Busco la coma
                 poscoma = autor.find(',')
-                # Si hay coma me quedo con lo de la derecha
+                # Si hay coma me quedo con lo de la izquierda
                 if  poscoma > -1:
                     autor = autor[:poscoma]
                 # Saco símbolos extraños
