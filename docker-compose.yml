@@ -15,22 +15,24 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.web
+    command: ./node_modules/serve/bin/serve.js -s build
+    entrypoint: /docker-entrypoint-web.sh
     ports:
-      - "127.0.0.1:8090:80"
+      - "127.0.0.1:8090:5000"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
+      test: ["CMD", "curl", "-f", "http://localhost:5000"]
       interval: 1m30s
       timeout: 10s
       retries: 3
     security_opt:
       - no-new-privileges:true
     volumes:
-      - ./public:/usr/local/apache2/htdocs/
+      - /etc/localtime:/etc/localtime:ro
 
-  vis:
+  api:
     build:
       context: .
-      dockerfile: Dockerfile.vis
+      dockerfile: Dockerfile.api
     command: node server.js
     entrypoint: /docker-entrypoint.sh
     ports:

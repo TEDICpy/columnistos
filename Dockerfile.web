@@ -1,6 +1,18 @@
-FROM httpd:alpine
-
+FROM node:13
 MAINTAINER Lu Pa <admin@tedic.org>
 
-RUN apk --update --no-cache add curl
+ENV DEBIAN_FRONTEND noninteractive
+ENV REPO https://github.com/TEDICpy/visualizador_columnistos.git
+ENV APP /usr/src/app
 
+RUN apt-get update \
+        && apt-get install -y \
+                curl \
+                git \
+        && apt-get clean
+
+RUN git clone $REPO $APP
+
+WORKDIR $APP
+
+COPY docker-entrypoint-web.sh /
