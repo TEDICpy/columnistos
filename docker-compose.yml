@@ -5,7 +5,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    env_file: docker.env
+    environment:
+      - TESTING=${TESTING}
+      - LOG_FOLDER=${LOG_FOLDER}
+      - TWITTER_CONSUMER_KEY=${TWITTER_CONSUMER_KEY}
+      - TWITTER_CONSUMER_SECRET=${TWITTER_CONSUMER_SECRET}
+      - TWITTER_ACCESS_TOKEN=${TWITTER_ACCESS_TOKEN}
+      - TWITTER_ACCESS_TOKEN_SECRET=${TWITTER_ACCESS_TOKEN_SECRET}
     security_opt:
       - no-new-privileges:true
     volumes:
@@ -15,6 +21,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.web
+    environment:
+      - REACT_APP_COUNTRY=${REACT_APP_COUNTRY}
+      - REACT_APP_MEDIOS=${REACT_APP_MEDIOS}
+      - REACT_APP_MEDIOS_BD_NAMES=${REACT_APP_MEDIOS_BD_NAMES}
+      - REACT_APP_API_URL=${REACT_APP_API_URL}
     command: ./node_modules/serve/bin/serve.js -s build
     entrypoint: /docker-entrypoint-web.sh
     ports:

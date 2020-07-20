@@ -131,16 +131,20 @@ Para que todo funcione automaticamente hay que agregar los `.sh` a algún cronjo
 ```
 # Instalación y uso con Docker
 
-## Instalar y correr el bot
+## Configuracion general
 
-**1.** Copiar el archivo **docker.env-sample** a **docker.env** y agregar los valores deseados, es decir, las claves de la API de twitter y un par de parámetros más.
+**1.** Copiar el archivo **example.env** a **.env** y colocar todos los valores de variables necesarias: claves de la API de twitter, país, URL, etc. para la instancia que estás configurando.
 
 También copiar **docker-run.sh-sample** a **docker-run.sh** y cambiar los valores de los diarios a escrapear.
 
 **2.** Levantar el contenedeor (la primer vez va a demorar pues instala todas las dependencias y crea la base de nombres):
 ```
-docker-compose up app
+docker-compose up
 ```
+
+Eso va a correr **el bot** y además levantar 2 servicios: **la API** y **la web**.
+
+## El bot
 
 Con esto ya se puede poner el scrapper a funcionar, corriendo cada vez: `docker-compose up -d app`
 
@@ -148,7 +152,7 @@ Si se desea comenzar con base nueva, borrar el archivo **diarios.sqlite** que es
 
 Además esta otra funcionalidad es importante:
 
-## Mensaje directo
+### Mensaje directo
 
 Se utiliza para corregir nombres sin género y otros avisos:
 
@@ -159,7 +163,7 @@ Comando para enviar el mensaje:
 docker-compose run --rm app python columnistos_bot.py -dm
 ```
 
-## Tuit
+### Tuit
 
 Luego de dos días de correr el bot, **se puede empezar a tuitear**, con este comando:
 
@@ -167,23 +171,23 @@ Luego de dos días de correr el bot, **se puede empezar a tuitear**, con este co
 docker-compose run --rm app python columnistos_bot.py -tweet
 ```
 
-## Exponer los resultados
+## La API
 
-**1.** Exportar la base a la carpeta `public` en formato csv con este comando:
+La API expone los datos en la URL que se haya definido anteriormente
+
+Para correr solo la API, se podría hacer así:
 
 ```
-./columnistos-pub.sh PAIS-o-REGION
+docker-compose up -d api
 ```
 
-**2.** Publicar la carpeta `public` usando servidor web en el puerto 8095:
+## La Web
+
+La web o visualizador también se puede levantar aparte. Para que funione bien tienen que estar todos los parámetros configurados en el paso **1**.
 
 ```
 docker-compose up -d web
 ```
-
-Esto deja corriendo un **servidor web**, quiere decir que si se apaga la computadora o se hace un `docker-compose stop` la base csv ya no estará públicamente dispinible.
-
-Para verlo en tu computaodra local, puedes acceder a localhost:8095 en tu navegador.
 
 ## Un ejemplo de CRON con docker para Paraguay:
 

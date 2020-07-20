@@ -2,7 +2,7 @@
 # No queremos que se haga commit de la base 
 public/
 *.sqlite
-*.env
+.env
 *.csv
 nbproject/
 docker-run.sh
