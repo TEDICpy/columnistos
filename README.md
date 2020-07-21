@@ -179,9 +179,9 @@ docker-compose run --rm app python columnistos_bot.py -tweet
 
 ## La API
 
-La API expone los datos en la URL que se haya definido anteriormente
+La API expone los datos en la URL que se haya definido anteriormente. 
 
-Para correr solo la API, se podría hacer así:
+La API ya debe estar corriendo al levantar todo junto pero si fuera necesacio correr solo la API, se podría hacer así:
 
 ```
 docker-compose up -d api
@@ -189,7 +189,7 @@ docker-compose up -d api
 
 ## La Web
 
-La web o visualizador también se puede levantar aparte. Para que funione bien tienen que estar todos los parámetros configurados en el paso **1**.
+La web o visualizaciones también deberían estar corriendo, pero también se puede levantar aparte. Para que funione bien tienen que estar todos los parámetros configurados en el paso **1** y la API levantada. Para levantar la web individualmente, correr así:
 
 ```
 docker-compose up -d web
@@ -210,8 +210,6 @@ USUARIO=usuario-unix-con-capacidad-de-ejecutar-docker-compose
 # Twit a las 8:00
 0 8 * * * $USUARIO $BIN/docker-compose -f $APP/docker-compose.yml run --rm app python columnistos_bot.py -tweet
 ```
-
-## Créditos
 
 [@columnistos]: https://twitter.com/columnistos
 [COLLABORATORS.md]: COLLABORATORS.md
