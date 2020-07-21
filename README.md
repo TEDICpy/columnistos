@@ -144,6 +144,12 @@ docker-compose up
 
 Eso va a correr **el bot** y además levantar 2 servicios: **la API** y **la web**.
 
+**3.** Hay que exponer la API en una URL accesible por la web, por ejemplo para el caso paraguayo apicolumnistos.tedic.net apunta al servidor al puerto localhost:8095.
+
+Luego la URL de la API definida en .env debe coincidir con esta, para que la web funcione correctamente (ver example.env). 
+
+Por último hay que exponer la URL de la web, que debe apuntar a localhost 8090.
+
 ## El bot
 
 Con esto ya se puede poner el scrapper a funcionar, corriendo cada vez: `docker-compose up -d app`
@@ -189,7 +195,9 @@ La web o visualizador también se puede levantar aparte. Para que funione bien t
 docker-compose up -d web
 ```
 
-## Un ejemplo de CRON con docker para Paraguay:
+## Automatización
+
+Aquí hay un ejemplo de archivo CRON, para correr el bot con mensaje directo, el bot y el tweet respectivamente (con docker para Paraguay)
 
 ```
 BIN=/usr/local/bin
@@ -197,13 +205,13 @@ APP=/carpeta-donde-esta-instalado-el-bot/columnistos-docker
 USUARIO=usuario-unix-con-capacidad-de-ejecutar-docker-compose
 # Corro el crawler a las 00:01 y DM por si hay algo que corregir
 01 00 * * * $USUARIO cd $APP && $BIN/docker-compose up -d app && $BIN/docker-compose run --rm app python columnistos_bot.py -dm
-# Publico csv a las 00:20
-20 00 * * * $USUARIO cd $APP && ./columnistos-pub.sh paraguay
 # Corro el crawler cada 4 horas
 0 */4 * * * $USUARIO $BIN/docker-compose -f $APP/docker-compose.yml up -d app
 # Twit a las 8:00
 0 8 * * * $USUARIO $BIN/docker-compose -f $APP/docker-compose.yml run --rm app python columnistos_bot.py -tweet
 ```
+
+## Créditos
 
 [@columnistos]: https://twitter.com/columnistos
 [COLLABORATORS.md]: COLLABORATORS.md
